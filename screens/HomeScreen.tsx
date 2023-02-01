@@ -2,13 +2,27 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import ActionRow from "../components/ActionRow";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
+import { useNavigation } from "@react-navigation/native";
+
+export type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
 
 const HomeScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
-    <View className="flex-1 bg-gray-100 relative">
+    <SafeAreaView className="flex-1 bg-gray-100 relative">
       <ScrollView>
         {/* PRO/UPGRDE BUTTON */}
-        <TouchableOpacity className="absolute z-50 top-5 right-10 items-center">
+        <TouchableOpacity
+          className="absolute z-50 top-5 right-10 items-center"
+          onPress={() => navigation.navigate("Paywall")}
+        >
           <Ionicons name="person-circle" size={24} color="#E5962D" />
           <Text className="text-center text-[#E5962D]">PRO/UPGRADE</Text>
         </TouchableOpacity>
@@ -65,7 +79,7 @@ const HomeScreen = () => {
           />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

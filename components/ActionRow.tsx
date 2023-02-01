@@ -1,6 +1,14 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../App";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+export type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
 
 type Props = {
   title: string;
@@ -10,6 +18,7 @@ type Props = {
   vertical?: boolean;
   requiresPro?: boolean;
 };
+
 const ActionRow = ({
   title,
   screen,
@@ -18,8 +27,10 @@ const ActionRow = ({
   vertical,
   requiresPro,
 }: Props) => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <TouchableOpacity
+      onPress={() => navigation.navigate(screen)}
       className={`flex flex-1 m-2 justify-center items-center py-6 rounded-lg space-x-2 ${
         vertical ? "flex-col" : "flex-row"
       }`}
